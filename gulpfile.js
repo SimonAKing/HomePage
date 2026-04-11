@@ -14,7 +14,7 @@ const less = require('gulp-less')
 const config = require('./config.json')
 
 gulp.task('clean', function () {
-	return del(['./dist/css/', './dist/js/'])
+	return del(['./dist/css/', './dist/js/', './dist/i18n/', './dist/config/'])
 })
 
 gulp.task('css', function () {
@@ -59,14 +59,28 @@ gulp.task('assets', function () {
 		.pipe(gulp.dest('./dist/assets'));
 })
 
-gulp.task('build', gulp.series('clean', 'assets', 'pug', 'css', 'js', 'html'))
+gulp.task('i18n', function () {
+	return gulp
+		.src(['./src/i18n/**/*.json'])
+		.pipe(gulp.dest('./dist/i18n'));
+})
+
+gulp.task('config', function () {
+	return gulp
+		.src(['./src/config/**/*.json'])
+		.pipe(gulp.dest('./dist/config'));
+})
+
+gulp.task('build', gulp.series('clean', 'assets', 'pug', 'css', 'js', 'i18n', 'config', 'html'))
 gulp.task('default', gulp.series('build'))
 
 gulp.task('watch', function () {
 	gulp.watch('./src/components/*.pug', gulp.parallel('pug'))
 	gulp.watch('./src/index.pug', gulp.parallel('pug'))
-	gulp.watch('./src/css/**/*.scss', gulp.parallel(['css']))
+	gulp.watch('./src/css/**/*.less', gulp.parallel(['css']))
 	gulp.watch('./src/js/*.js', gulp.parallel(['js']))
+	gulp.watch('./src/i18n/*.json', gulp.parallel(['i18n']))
+	gulp.watch('./src/config/*.json', gulp.parallel(['config']))
 	connect.server({
 		root: 'dist',
 		livereload: true,

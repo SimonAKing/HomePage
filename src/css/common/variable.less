@@ -6,14 +6,24 @@
 @font-alt: 200 6vw/1 'Comic Sans MS', 'Helvetica Neue', 'Microsoft Yahei',
 	'Microsoft Yahei', -apple-system, sans-serif;
 
-// CSS变量（为了保持兼容性）
 :root {
+	--color-background: #060606;
+	--color-content: #222325;
+	--color-title: #ffffff;
+	--color-text: #ffffff;
 	--color-link: @color-link;
 	--color-link-hover: @color-link-hover;
 	--color-enter: @color-enter;
-	--color-title: @color-title;
-	--color-content: @color-content;
-	--font-alt: @font-alt;
+	--color-border: rgba(255, 255, 255, 0.05);
+	--color-hover-fill: rgba(255, 255, 255, 0.6);
+	--color-hover-shadow: rgba(255, 255, 255, 0.3);
+	--color-special-block: rgba(255, 100, 100, 0.8);
+	--color-snake-head: rgba(255, 255, 255, 0.9);
+	--color-snake-tail: rgba(100, 100, 255, 0.3);
+	--font-primary: 'Helvetica Neue', 'Microsoft Yahei', -apple-system, sans-serif;
+	--font-title: @font-alt;
+	--font-size-base: 20px;
+	--transition-speed: 0.3s;
 }
 
 .fade {
